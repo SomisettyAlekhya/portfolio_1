@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Details | Alekhya Somisetty</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(160deg,#fff7ef,#ffe8d4);
+    color:#1f1f1f;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+}
+
+.wrap{
+    width:min(860px,100%);
+    background:#fffdf9;
+    border:1px solid #f2ccb0;
+    border-radius:14px;
+    padding:24px;
+    box-shadow:0 16px 34px rgba(44,24,8,0.18);
+}
+
+h1{
+    font-size:1.5rem;
+    margin-bottom:12px;
+    color:#8d3400;
+}
+
+p{
+    font-size:1rem;
+    line-height:1.7;
+    margin-bottom:16px;
+}
+
+h2{
+    font-size:1.05rem;
+    margin:16px 0 8px;
+    color:#7a2f00;
+}
+
+ul{
+    padding-left:18px;
+    margin-bottom:14px;
+}
+
+li{
+    margin-bottom:8px;
+    line-height:1.6;
+}
+
+.row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.btn{
+    display:inline-block;
+    text-decoration:none;
+    font-weight:700;
+    font-size:0.9rem;
+    padding:10px 14px;
+    border-radius:10px;
+    border:1px solid #efba95;
+    background:#ffe6cf;
+    color:#7a2f00;
+}
+
+.btn:hover{
+    background:#ffd9b6;
+}
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <h1 id="projectTitle">Project</h1>
+        <p id="projectDesc">Project description will appear here.</p>
+        <h2>Implementation Steps</h2>
+        <ul id="projectSteps"></ul>
+        <h2>Skills Used</h2>
+        <ul id="projectSkills"></ul>
+        <div class="row">
+            <a class="btn" id="githubLink" href="https://github.com/somisettyalekhya" target="_blank" rel="noopener noreferrer">View GitHub</a>
+            <a class="btn" href="index.html">Back to Portfolio</a>
+        </div>
+    </div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const title = params.get("title") || "Project";
+const descFromUrl = params.get("desc") || "Detailed project description is not available.";
+
+const projectData = {
+    "Medical Image Classification using CNN":{
+        description:"Built a deep learning pipeline for medical image classification with preprocessing, augmentation, and model tuning for reliable performance.",
+        steps:[
+            "Collected and validated labeled medical image datasets.",
+            "Applied preprocessing and augmentation to improve model generalization.",
+            "Built and trained a CNN architecture using TensorFlow/Keras.",
+            "Tuned hyperparameters and monitored validation metrics.",
+            "Evaluated performance using accuracy and class-wise analysis.",
+            "Prepared inference-ready model for practical use."
+        ],
+        skills:["Python","TensorFlow","Keras","NumPy","OpenCV","Deep Learning"],
+        github:"https://github.com/SomisettyAlekhya/detecting-braintumor-and-pneumonia"
+    },
+    "Credit Card Fraud Detection System":{
+        description:"Developed an end-to-end fraud detection workflow to identify suspicious financial transactions in highly imbalanced datasets.",
+        steps:[
+            "Performed data cleaning and exploratory data analysis on transaction records.",
+            "Handled class imbalance and engineered useful model features.",
+            "Trained multiple models and compared precision-recall behavior.",
+            "Selected best-performing model for fraud-risk classification.",
+            "Validated the model with robust evaluation metrics.",
+            "Prepared pipeline logic for deployment and monitoring."
+        ],
+        skills:["Python","Pandas","Scikit-learn","Logistic Regression","Random Forest","SVM"],
+        github:"https://github.com/SomisettyAlekhya/creditcard"
+    },
+    "Resume Screening & Categorization Application":{
+        description:"Created an NLP-based system to automatically classify resumes into relevant job categories with a practical prediction interface.",
+        steps:[
+            "Collected and labeled resume samples by role categories.",
+            "Preprocessed text and applied NLP cleaning techniques.",
+            "Converted text into TF-IDF feature vectors.",
+            "Trained SVM classifier and optimized model performance.",
+            "Built a simple UI for real-time resume classification.",
+            "Saved and loaded trained pipeline using Joblib."
+        ],
+        skills:["Python","NLP","TF-IDF","SVM","Streamlit","Joblib"],
+        github:"https://github.com/SomisettyAlekhya/resume-analyser"
+    },
+    "Automated Email Workflow using Gmail/SMTP":{
+        description:"Built a simple automated email workflow that sends greeting emails using triggers, data setup, and Gmail/SMTP integration. The workflow was designed for easy testing and step-by-step execution validation.",
+        steps:[
+            "Created a new workflow.",
+            "Used a Manual Trigger to start the workflow for easy testing.",
+            "Added a Set node to define email content (To, Subject, and message like 'Hello folks').",
+            "Configured Gmail/SMTP node with authenticated credentials.",
+            "Connected all nodes and executed the workflow.",
+            "Verified successful email delivery using execution logs."
+        ],
+        skills:["Workflow Automation","Manual Trigger","Set Node","Gmail/SMTP","Credential Management","Execution Logs"],
+        github:"https://www.linkedin.com/posts/alekhya-somisetty-221701227_n8n-automation-learning-activity-7422877970173829120-Ir1N?utm_source=share&utm_medium=member_desktop&rcm=ACoAADjhC_kBDCO-gX-BhhF9Zo5HeFlKw7li228"
+    },
+    "Enterprise Generative AI Knowledge Assistant":{
+        description:"Built a Retrieval-Augmented Generation assistant for enterprise documents to provide context-aware and accurate responses.",
+        steps:[
+            "Prepared and chunked enterprise documents for retrieval.",
+            "Generated embeddings and indexed them for semantic search.",
+            "Built retrieval logic to fetch top relevant context.",
+            "Designed prompt templates for grounded LLM responses.",
+            "Integrated end-to-end query pipeline for users.",
+            "Tested response quality and refined retrieval behavior."
+        ],
+        skills:["Python","LLMs","RAG","Embeddings","Prompt Engineering","LangChain"],
+        github:"https://github.com/SomisettyAlekhya/chatbot-langchain"
+    },
+    "Telegram File Processing Automation":{
+        description:"Built an automation workflow where Telegram files are processed, transformed, and returned through AI-powered API orchestration.",
+        steps:[
+            "Configured Telegram bot integration for file ingestion.",
+            "Built n8n workflow to capture and validate input files.",
+            "Converted file payloads to Base64 for API compatibility.",
+            "Connected workflow with external AI APIs for processing.",
+            "Handled API responses and transformed outputs.",
+            "Returned final results to users through Telegram."
+        ],
+        skills:["n8n","Telegram API","HTTP Requests","Base64 Encoding","Workflow Automation","API Integration"],
+        github:"https://www.linkedin.com/posts/alekhya-somisetty-221701227_n8n-automation-ai-activity-7423762557796106240-bmmO?utm_source=share&utm_medium=member_desktop&rcm=ACoAADjhC_kBDCO-gX-BhhF9Zo5HeFlKw7li228"
+    },
+    "AI Chatbot with Memory using n8n":{
+        description:"Created a context-aware chatbot workflow with persistent memory for more natural and relevant multi-turn conversations.",
+        steps:[
+            "Designed chatbot flow with n8n AI Agent nodes.",
+            "Integrated OpenAI chat model for response generation.",
+            "Configured memory nodes to store conversation context.",
+            "Connected input/output channels for end-user interaction.",
+            "Tested multi-turn behavior and refined prompts.",
+            "Optimized response quality and consistency."
+        ],
+        skills:["n8n","OpenAI Chat Model","AI Agent","Memory Management","Prompt Design"],
+        github:"https://www.linkedin.com/posts/alekhya-somisetty-221701227_n8n-chatbot-aiagent-activity-7423281450461941760-erHC?utm_source=share&utm_medium=member_desktop&rcm=ACoAADjhC_kBDCO-gX-BhhF9Zo5HeFlKw7li228"
+    },
+    "Meta Ads Performance Dashboard":{
+        description:"Developed a business dashboard to monitor campaign performance, CTR, ROI, and trends for optimization decisions.",
+        steps:[
+            "Collected and cleaned campaign performance datasets.",
+            "Modeled data relationships for dashboard reporting.",
+            "Created KPI measures and DAX calculations.",
+            "Built executive visuals for channel and campaign analysis.",
+            "Added filtering for period and campaign-level insights.",
+            "Published dashboard for decision support."
+        ],
+        skills:["Power BI","DAX","Excel","Data Modeling","KPI Design"],
+        github:"https://github.com/SomisettyAlekhya/Meta-Ad"
+    },
+    "Annual Sales Executive Dashboard":{
+        description:"Converted transactional sales data into a dynamic executive dashboard to highlight growth patterns and business opportunities.",
+        steps:[
+            "Prepared yearly sales data using Power Query.",
+            "Built pivot-based analytical summaries in Excel.",
+            "Defined metrics for performance and growth tracking.",
+            "Created interactive charts and drill-down views.",
+            "Analyzed product, region, and period trends.",
+            "Presented insights for executive planning."
+        ],
+        skills:["Excel","Power Query","Pivot Tables","Data Visualization","Business Analytics"],
+        github:"https://github.com/SomisettyAlekhya/vrindha"
+    },
+    "Dockerized Machine Learning Workflow":{
+        description:"Containerized a machine learning pipeline to ensure consistent runtime environments and reproducible experimentation.",
+        steps:[
+            "Structured ML workflow into modular pipeline stages.",
+            "Created Dockerfile with required dependencies.",
+            "Containerized training and inference setup.",
+            "Tested portability across different local environments.",
+            "Validated consistent outputs between runs.",
+            "Documented container usage for collaboration."
+        ],
+        skills:["Python","Scikit-learn","Docker","ML Pipelines","Environment Management"],
+        github:"https://github.com/SomisettyAlekhya/Docker_ml"
+    },
+    "Docker + MySQL Containerized Database Project":{
+        description:"Set up MySQL in Docker containers with schema design, networking configuration, and advanced SQL operations.",
+        steps:[
+            "Provisioned MySQL container using Docker configuration.",
+            "Configured networking and persistent storage volumes.",
+            "Designed relational schema and data constraints.",
+            "Loaded sample datasets for testing queries.",
+            "Executed advanced SQL analysis and optimizations.",
+            "Validated setup for reproducible local deployment."
+        ],
+        skills:["Docker","MySQL 8.0","SQL","Container Networking","Database Design"],
+        github:"https://www.linkedin.com/posts/alekhya-somisetty-221701227_docker-mysql-sql-activity-7429092809896378368-H6i4?utm_source=share&utm_medium=member_desktop&rcm=ACoAADjhC_kBDCO-gX-BhhF9Zo5HeFlKw7li228"
+    }
+};
+
+const fallback = {
+    description: descFromUrl,
+    steps: [
+        "Defined the project objective and scope.",
+        "Collected and prepared required data/resources.",
+        "Implemented the core workflow and logic.",
+        "Tested outputs and validated quality.",
+        "Optimized performance and reliability.",
+        "Documented final solution and usage."
+    ],
+    skills: ["Python","SQL","APIs","Data Analysis","Automation"],
+    github: "https://github.com/somisettyalekhya"
+};
+
+const data = projectData[title] || fallback;
+
+document.getElementById("projectTitle").textContent = title;
+document.getElementById("projectDesc").textContent = data.description;
+const projectLinkEl = document.getElementById("githubLink");
+projectLinkEl.href = data.github;
+projectLinkEl.textContent = data.github.includes("github.com") ? "View GitHub" : "View Project Link";
+
+const stepsList = document.getElementById("projectSteps");
+data.steps.forEach(function (step) {
+    const li = document.createElement("li");
+    li.textContent = step;
+    stepsList.appendChild(li);
+});
+
+const skillsList = document.getElementById("projectSkills");
+data.skills.forEach(function (skill) {
+    const li = document.createElement("li");
+    li.textContent = skill;
+    skillsList.appendChild(li);
+});
+</script>
+</body>
+</html>

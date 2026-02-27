@@ -342,6 +342,10 @@ nav a:hover{
     will-change:transform;
 }
 
+.card.clickable{
+    cursor:pointer;
+}
+
 .skill-card::before,
 .card::before{
     content:"";
@@ -1392,6 +1396,20 @@ chatInput.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
         handleChatSend();
     }
+});
+
+const projectCards = document.querySelectorAll("#featured-projects .card, #projects .card");
+projectCards.forEach(function (card) {
+    card.classList.add("clickable");
+    card.setAttribute("title", "Open project details");
+    card.addEventListener("click", function () {
+        const titleEl = card.querySelector("h3");
+        const descEl = card.querySelector("p");
+        const title = titleEl ? titleEl.textContent.trim() : "Project";
+        const desc = descEl ? descEl.textContent.trim() : "";
+        const url = "project-details.html?title=" + encodeURIComponent(title) + "&desc=" + encodeURIComponent(desc);
+        window.location.href = url;
+    });
 });
 
 window.onload = typingEffect;
